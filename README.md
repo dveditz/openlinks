@@ -1,11 +1,16 @@
 # Open Selected Links
 [open selected links extension](https://addons.mozilla.org/en-US/firefox/addon/open-selected-links/)
  
-This extension adds context menu items to deal with links found in a web page selection. Primarily all of the selected HTML links will be opened in new tabs. It can also open all the text URLs found in a selection. If the cursor is directly on a link it you also have the option to open a view-source tab for that link.
+This extension adds context menu items to deal with links found in a web page selection. The main functionality is to open all of the selected HTML links in new tabs. If there are no HTML links it will open any text URLs it can find in the selection. As a last resort, and specific to Firefox development, it will treat 5-7 digit numbers as bugzilla.mozilla.org bug IDs and open those as tabs. If the cursor is directly on a link it you also have the option to open a view-source tab for that link.
 
-This is the initial "0.9" version that can be found on addons.mozilla.org. Several improvements are planned:
-* switch to activeTab so we don't need \<all_urls\> permission
-* only show Open Selected Text Links if there are some, so that most of the time people don't need to open a sub-menu to open selected links
-* respect containers: currently new tabs are always opened in the default rather than the container used by the current page.
+## Changes
+### Version 1.0
+* The add-on no longer injects a content-script into all urls. Instead it uses the `activeTab` and `scripting` permissions to inject the content-script only into the tabs where the user activated the contentMenu item.
+* Combined the "selected" and "text" link functionality to avoid unnecessary sub-menus
+* New tabs are created in the container ("cookieStoreId") of the tab with the selection. This required adding the `cookies` permission
+* View-source tabs are now opened as a foreground tab instead of in the background
+* Converted to Manifest v3
+### Version 0.9
+The original version
  
 
